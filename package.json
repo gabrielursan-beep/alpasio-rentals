@@ -23,6 +23,7 @@
     "@tailwindcss/vite": "^4.3.3"
   },
   "allowScripts": {
-    "esbuild": true
+    "esbuild": true,
+    "sharp": true
   }
 }

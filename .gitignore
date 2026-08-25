@@ -12,6 +12,7 @@ build/
 out/
 .turbo/
 .cache/
+.astro/
 
 # Claude Code local (specific masinii)
 .claude/settings.local.json
