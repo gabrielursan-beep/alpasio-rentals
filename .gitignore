@@ -1,0 +1,21 @@
+# Secrete si mediu local (nu se comit niciodata)
+.env
+.env.*
+*.local
+.secrets/
+
+# Dependinte si build
+node_modules/
+.next/
+dist/
+build/
+out/
+.turbo/
+.cache/
+
+# Claude Code local (specific masinii)
+.claude/settings.local.json
+
+# Sistem
+.DS_Store
+*.log

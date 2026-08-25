@@ -1,0 +1,70 @@
+---
+export interface Props {
+  images: string[];
+  alt: string;
+}
+const { images, alt } = Astro.props;
+---
+
+<div class="gallery">
+  <div class="grid gap-2 md:grid-cols-12">
+    <div class="md:col-span-8">
+      <div class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-black/5">
+        <img id="gallery-main" src={images[0]} alt={alt} width="1600" height="1200" class="h-full w-full object-cover" loading="eager" decoding="async" fetchpriority="high" />
+        <button id="gallery-prev" aria-label="Anterior" class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow hover:bg-white focus-ring">‹</button>
+        <button id="gallery-next" aria-label="Urmator" class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow hover:bg-white focus-ring">›</button>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-2 md:col-span-4 md:grid-cols-2 md:grid-rows-3">
+      {images.slice(0, 6).map((src, i) => (
+        <button
+          data-index={i}
+          class="gallery-thumb relative overflow-hidden rounded-xl bg-black/5 focus-ring"
+          aria-label={`Imagine ${i+1}`}
+        >
+          <img src={src} alt={`${alt} ${i+1}`} loading="lazy" decoding="async" width="600" height="450" class="h-full w-full object-cover" />
+        </button>
+      ))}
+    </div>
+  </div>
+  <div class="mt-2 flex gap-2 overflow-x-auto pb-1">
+    {images.map((src, i) => (
+      <button data-index={i} class="gallery-dot h-1.5 w-8 rounded-full bg-black/10 aria-[current=true]:bg-[var(--color-primary)]" aria-current={i===0?'true':'false'}></button>
+    ))}
+  </div>
+</div>
+
+<script define:vars={{ images }}>
+  const main = document.getElementById('gallery-main');
+  const thumbs = document.querySelectorAll('.gallery-thumb');
+  const dots = document.querySelectorAll('.gallery-dot');
+  const prev = document.getElementById('gallery-prev');
+  const next = document.getElementById('gallery-next');
+  let idx = 0;
+  function set(i){
+    idx = (i + images.length) % images.length;
+    if(main) main.src = images[idx];
+    dots.forEach((d, k)=> d.setAttribute('aria-current', k===idx ? 'true':'false'));
+  }
+  thumbs.forEach(b=> b.addEventListener('click', ()=> set(parseInt(b.dataset.index))));
+  dots.forEach(b=> b.addEventListener('click', ()=> set(parseInt(b.dataset.index))));
+  prev?.addEventListener('click', ()=> set(idx-1));
+  next?.addEventListener('click', ()=> set(idx+1));
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowLeft') set(idx-1);
+    if(e.key==='ArrowRight') set(idx+1);
+  });
+  // swipe
+  let x0=null;
+  main?.addEventListener('pointerdown', e=> x0=e.clientX);
+  main?.addEventListener('pointerup', e=>{
+    if(x0===null) return;
+    const dx = e.clientX - x0;
+    if(Math.abs(dx)>40) set(idx + (dx<0?1:-1));
+    x0=null;
+  });
+</script>
+
+<style>
+  .gallery-thumb:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+</style>

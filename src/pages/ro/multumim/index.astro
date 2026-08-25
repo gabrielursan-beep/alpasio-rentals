@@ -1,0 +1,17 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const title='Mulțumim | Alpasio Rentals';
+const description='Mesaj trimis cu succes.';
+const canonical='https://alpasio-rentals-preview.ursan.org/ro/multumim/';
+---
+<Base title={title} description={description} lang="ro" canonical={canonical} noindex={true}>
+  <Header lang="ro" currentPath="/ro/multumim/" />
+  <main id="main" class="mx-auto max-w-xl px-4 py-16 text-center md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Mulțumim!</h1>
+    <p class="mt-2 text-[var(--color-text-muted)]">Formularul a fost trimis cu succes. Vei fi contactat în cel mai scurt timp la telefon sau email.</p>
+    <a href="/ro/" class="mt-6 inline-flex rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white">Înapoi la acasă</a>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,25 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { siteInfo } from '../../../data/apartments';
+const title='FAQ | Alpasio Rentals';
+const description='FAQ about check-in 14:00, check-out 12:00, cancellation, parking, vacation cards.';
+const canonical='https://alpasio-rentals-preview.ursan.org/en/faq/';
+const faqs=[
+  {q:'Can I cancel?',a:'Yes, with at least 24h notice.'},
+  {q:'Check-in/out?',a:`Check-in from ${siteInfo.checkIn}, check-out until ${siteInfo.checkOut}.`},
+  {q:'Vacation cards?',a:'We accept Edenred, Up and Pluxee.'},
+];
+const schema={"@context":"https://schema.org","@type":"FAQPage","mainEntity":faqs.map(f=>({"@type":"Question","name":f.q,"acceptedAnswer":{"@type":"Answer","text":f.a}}))};
+---
+<Base title={title} description={description} lang="en" canonical={canonical} hreflang={{ ro: canonical.replace('/en/faq/','/ro/intrebari-frecvente/'), en: canonical }} schema={schema}>
+  <Header lang="en" currentPath="/en/faq/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">FAQ</h1>
+    <div class="mt-6 divide-y rounded-3xl border bg-white">
+      {faqs.map(f=> <details class="p-5"><summary class="font-semibold cursor-pointer">{f.q}</summary><p class="mt-2 text-sm text-[var(--color-text-muted)]">{f.a}</p></details>)}
+    </div>
+  </main>
+  <Footer />
+</Base>

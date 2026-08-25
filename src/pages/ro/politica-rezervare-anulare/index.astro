@@ -1,0 +1,21 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const title='Politica de rezervare și anulare | Alpasio Rentals';
+const description='Draft Politica de rezervare și anulare - placeholder, necesită verificare juridică.';
+const canonical='https://alpasio-rentals-preview.ursan.org/ro/politica-rezervare-anulare/';
+---
+<Base title={title} description={description} lang="ro" canonical={canonical} noindex={true}>
+  <Header lang="ro" currentPath="/ro/politica-rezervare-anulare/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Politica de rezervare și anulare</h1>
+    <p class="mt-2 text-xs inline-flex rounded-full bg-amber-100 px-2 py-1 font-semibold text-amber-800">Draft - necesită verificare specialist și date firmă [de confirmat]</p>
+    <div class="prose prose-sm mt-6 max-w-none text-[var(--color-text-muted)]">
+      <p>Acest document este un draft pregătit pe baza surselor oficiale la august 2026 și va fi validat de client și de un specialist înainte de lansare. Nu reprezintă consultanță juridică definitivă.</p>
+      <p>Operator: [Nume firmă SRL, CUI, J, sediu - de confirmat]. Contact DPO: office.alpasio@gmail.com. Scopuri: gestionare rezervări, facturare, comunicare. Bază legală: executare contract și interes legitim. Perioadă păstrare: 1 an pentru cereri de contact, conform obligații fiscale pentru facturi. Drepturi: acces, rectificare, ștergere, opoziție. Plângere la ANSPDCP.</p>
+      <p>Ultima actualizare: 25 august 2026.</p>
+    </div>
+  </main>
+  <Footer />
+</Base>

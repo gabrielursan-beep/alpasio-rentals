@@ -1,0 +1,25 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+const title='Locuri de vizitat în Galați | Alpasio Rentals';
+const description='Faleza Dunării 4km, Turnul TV 150m, Complexul Răsvan Angheluță, Domnească și alte locuri emblematice.';
+const canonical='https://alpasio-rentals-preview.ursan.org/ro/blog/locuri-de-vizitat-galati/';
+---
+<Base title={title} description={description} lang="ro" canonical={canonical} hreflang={{ ro: canonical, en: canonical.replace('/ro/blog/','/en/blog/') }}>
+  <Header lang="ro" currentPath="/ro/blog/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <nav class="text-xs text-[var(--color-text-muted)]"><a href="/ro/blog/" class="hover:underline">Blog</a> › Locuri de vizitat</nav>
+    <h1 class="mt-2 font-serif text-3xl font-bold">Locuri de vizitat în Galați</h1>
+    <p class="mt-1 text-xs text-[var(--color-text-muted)]">06/02/2023 · Alpasio · migrat și rescris</p>
+    <img src="https://alpasio.ro/wp-content/uploads/2023/02/181.Faleza_Dun_rii_4_5-1-1200x600.jpg" alt="Faleza Dunarii Galati" width="1200" height="600" class="mt-6 w-full rounded-2xl object-cover" loading="lazy" />
+    <div class="prose prose-sm mt-6 max-w-none">
+      <p>Te pregătești pentru o călătorie de business sau o escapadă în Galați? Iată cele mai emblematice locuri:</p>
+      <h2>Faleza Dunării</h2><p>4 km, cea mai lungă de pe Dunăre, pe două trepte. Plimbare la pas cu priveliște.</p>
+      <h2>Turnul Televiziunii</h2><p>150m, unic în România, panoramă 360°.</p>
+      <h2>Complexul Răsvan Angheluță</h2><p>Planetariu, observator astronomic, grădini botanică și zoologică.</p>
+      <p class="mt-6"><a href="/ro/apartamente/" class="font-semibold text-[var(--color-primary)] hover:underline">Vezi apartamentele →</a></p>
+    </div>
+  </main>
+  <Footer />
+</Base>

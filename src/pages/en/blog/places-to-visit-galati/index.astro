@@ -1,0 +1,14 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+const canonical='https://alpasio-rentals-preview.ursan.org/en/blog/places-to-visit-galati/';
+---
+<Base title="Places to visit in Galati" description="Faleza, TV Tower, museums" lang="en" canonical={canonical}>
+  <Header lang="en" currentPath="/en/blog/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Places to visit in Galati</h1>
+    <p class="mt-4">Adapted guide for international guests: Faleza 4km, TV Tower 150m, Răsvan Angheluță complex.</p>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,28 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Gallery from '../../../components/Gallery.astro';
+import { apartments, siteInfo } from '../../../data/apartments';
+export function getStaticPaths(){ return apartments.map(a=>({params:{slug:a.slug}})); }
+const {slug}=Astro.params;
+const ap=apartments.find(a=>a.slug===slug);
+if(!ap) return Astro.redirect('/en/apartments/');
+const canonical=`https://alpasio-rentals-preview.ursan.org/en/apartments/${ap.slug}/`;
+const title=`${ap.name.en} - Serviced Apartment Galati | Alpasio Rentals`;
+const description=`${ap.excerpt.en} From ${ap.priceFrom}${ap.currency}/night. ${ap.sizeM2}m², ${ap.rooms} rooms, max ${ap.maxGuests} guests.`;
+---
+<Base title={title} description={description} lang="en" canonical={canonical} hreflang={{ ro: canonical.replace('/en/apartments/','/ro/apartamente/'), en: canonical }}>
+  <Header lang="en" currentPath={`/en/apartments/${ap.slug}/`} />
+  <main id="main" class="mx-auto max-w-6xl px-4 py-6 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">{ap.name.en}</h1>
+    <p class="text-sm text-[var(--color-text-muted)]">{ap.address.en}</p>
+    <div class="mt-6"><Gallery images={ap.images} alt={ap.name.en} /></div>
+    <p class="mt-6 leading-relaxed">{ap.description.en}</p>
+    <div class="mt-4 flex gap-2">
+      <a href={siteInfo.phoneHref} class="rounded-full bg-[var(--color-secondary)] px-6 py-3 text-sm font-semibold text-white">Call {siteInfo.phone}</a>
+      <a href="/en/contact/" class="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white">Book</a>
+    </div>
+  </main>
+  <Footer />
+</Base>

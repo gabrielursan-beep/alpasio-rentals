@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const canonical='https://alpasio-rentals-preview.ursan.org/en/terms/';
+---
+<Base title="terms | Alpasio Rentals" description="Draft terms" lang="en" canonical={canonical} noindex={true}>
+  <Header lang="en" currentPath="/en/terms/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">terms</h1>
+    <p class="mt-2 text-xs bg-amber-100 inline-flex px-2 py-1 rounded-full font-semibold">Draft - to confirm</p>
+    <p class="mt-4 text-sm text-[var(--color-text-muted)]">Placeholder legal page, needs verification.</p>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,16 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const title='Vacation cards Galati | Alpasio Rentals';
+const description='Pay with Edenred, Up, Pluxee vacation cards in Galati.';
+const canonical='https://alpasio-rentals-preview.ursan.org/en/vacation-cards/';
+---
+<Base title={title} description={description} lang="en" canonical={canonical} hreflang={{ ro: canonical.replace('/en/vacation-cards/','/ro/carduri-vacanta/'), en: canonical }}>
+  <Header lang="en" currentPath="/en/vacation-cards/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Vacation cards</h1>
+    <p class="mt-2 text-sm text-[var(--color-text-muted)]">We accept Edenred, Up and Pluxee (ex-Sodexo). Romanian vacation vouchers. Payment on location or via link. [To confirm]</p>
+  </main>
+  <Footer />
+</Base>

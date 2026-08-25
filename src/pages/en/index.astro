@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ApartmentCard from '../../components/ApartmentCard.astro';
+import { apartments, siteInfo } from '../../data/apartments';
+const title='Serviced Apartments Galați | Alpasio Rentals';
+const description='Clean serviced apartments in Galati for business and families. 2 apartments 54m², WiFi, parking, kitchen, vacation cards. From 51€/night.';
+const canonical='https://alpasio-rentals-preview.ursan.org/en/';
+const schema={
+  "@context":"https://schema.org",
+  "@type":"LodgingBusiness",
+  "name":"Alpasio Rentals",
+  "url": canonical
+};
+---
+<Base title={title} description={description} lang="en" canonical={canonical} hreflang={{ ro: canonical.replace('/en/','/ro/'), en: canonical }} schema={schema}>
+  <Header lang="en" currentPath="/en/" />
+  <main id="main" class="mx-auto max-w-6xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-4xl font-bold">Serviced apartments in Galați</h1>
+    <p class="mt-2 text-sm text-[var(--color-text-muted)]">Comfort, cleanliness and transparency. Adapted for English-speaking guests, not literal translation.</p>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      {apartments.map(a => <ApartmentCard apartment={a} lang="en" />)}
+    </div>
+    <div class="mt-8 flex gap-3">
+      <a href="/en/apartments/" class="rounded-full bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-white">View apartments</a>
+      <a href="/en/contact/" class="rounded-full border border-black/10 px-6 py-3 text-sm font-semibold bg-white">Check availability</a>
+    </div>
+  </main>
+  <Footer />
+</Base>

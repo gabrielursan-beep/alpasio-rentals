@@ -1,0 +1,80 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  lang: 'ro' | 'en';
+  canonical?: string;
+  noindex?: boolean;
+  hreflang?: { ro: string; en: string };
+  ogImage?: string;
+  schema?: any;
+}
+
+const {
+  title,
+  description,
+  lang,
+  canonical,
+  noindex = false,
+  hreflang,
+  ogImage = '/og-default.jpg',
+  schema,
+} = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, '') || 'https://alpasio-rentals-preview.ursan.org';
+const currentUrl = canonical || new URL(Astro.url.pathname, site).toString();
+const isPreview = site.includes('preview.ursan.org');
+const robots = noindex || isPreview ? 'noindex, nofollow' : 'index, follow';
+const ogLocale = lang === 'ro' ? 'ro_RO' : 'en_GB';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={currentUrl} />
+    <meta name="robots" content={robots} />
+    {isPreview && <meta name="robots" content="noindex, nofollow" />}
+    
+    {hreflang && (
+      <>
+        <link rel="alternate" hreflang="ro-RO" href={hreflang.ro} />
+        <link rel="alternate" hreflang="en-GB" href={hreflang.en} />
+        <link rel="alternate" hreflang="x-default" href={hreflang.ro} />
+      </>
+    )}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:site_name" content="Alpasio Rentals" />
+    <meta property="og:image" content={new URL(ogImage, site).toString()} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <meta name="theme-color" content="#b45a2a" />
+
+    <!-- Umami analytics privacy-first, no cookies -->
+    <script defer src="https://analytics.gabrielursan.ro/script.js" data-website-id="alpasio-rentals-placeholder"></script>
+
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+
+    <slot name="head" />
+  </head>
+  <body class="flex min-h-screen flex-col bg-[var(--color-bg)]">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-black">Sari la conținut</a>
+    <slot />
+    
+    <style is:global>
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap');
+    </style>
+  </body>
+</html>

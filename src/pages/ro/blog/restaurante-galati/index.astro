@@ -1,0 +1,23 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+const title='Cele mai bune restaurante din Galați | Alpasio Rentals';
+const description='Top 10 restaurante Galați: Blue Acqua, Teatris, Gaffino, Union Jack și altele.';
+const canonical='https://alpasio-rentals-preview.ursan.org/ro/blog/restaurante-galati/';
+---
+<Base title={title} description={description} lang="ro" canonical={canonical}>
+  <Header lang="ro" currentPath="/ro/blog/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Cele mai bune restaurante din Galați</h1>
+    <p class="mt-1 text-xs text-[var(--color-text-muted)]">11/10/2022 · migrat</p>
+    <div class="prose prose-sm mt-6 max-w-none">
+      <p>Explorarea orașului e incompletă fără gastronomie. Iată 10 recomandări locale.</p>
+      <h3>Blue Acqua</h3><p>Pește și fructe de mare, renumit în oraș.</p>
+      <h3>Teatris</h3><p>Românesc și italian, lângă teatru.</p>
+      <h3>Gaffino</h3><p>Ca la mama acasă, porții generoase.</p>
+      <p><a href="/ro/contact/" class="font-semibold text-[var(--color-primary)]">Rezervă cazarea →</a></p>
+    </div>
+  </main>
+  <Footer />
+</Base>

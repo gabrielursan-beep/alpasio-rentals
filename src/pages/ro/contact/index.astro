@@ -1,0 +1,101 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { siteInfo } from '../../../data/apartments';
+
+const title = 'Contact și rezervări | Alpasio Rentals Galați';
+const description = 'Contact Alpasio Rentals Galați: telefon +40 743 684 327, WhatsApp, email office.alpasio@gmail.com. Solicită disponibilitate pentru M19 și M2. Răspuns rapid.';
+const canonical = 'https://alpasio-rentals-preview.ursan.org/ro/contact/';
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description
+};
+---
+
+<Base title={title} description={description} lang="ro" canonical={canonical} hreflang={{ ro: canonical, en: canonical.replace('/ro/contact/','/en/contact/') }} schema={schema}>
+  <Header lang="ro" currentPath="/ro/contact/" />
+  <main id="main" class="mx-auto max-w-6xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Îți stăm la dispoziție</h1>
+    <p class="mt-2 max-w-2xl text-sm text-[var(--color-text-muted)]">Telefon, WhatsApp sau formular. Toate cererile ajung la office.alpasio@gmail.com și primești confirmare.</p>
+    
+    <div class="mt-8 grid gap-8 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <div class="rounded-3xl border border-black/5 bg-white p-6">
+          <h2 class="font-semibold">Contact direct</h2>
+          <ul class="mt-3 space-y-3 text-sm">
+            <li><span class="font-semibold">Telefon / WhatsApp:</span> <a href={siteInfo.phoneHref} class="font-medium text-[var(--color-primary)] hover:underline">{siteInfo.phone}</a></li>
+            <li><span class="font-semibold">Email:</span> <a href={siteInfo.emailHref} class="hover:underline">{siteInfo.email}</a></li>
+            <li><span class="font-semibold">Adresă:</span> {siteInfo.address} — la cerere trimitem pinul exact pe WhatsApp.</li>
+            <li><span class="font-semibold">Check-in:</span> {siteInfo.checkIn} · <span class="font-semibold">Check-out:</span> {siteInfo.checkOut}</li>
+          </ul>
+          <div class="mt-4 flex gap-2">
+            <a href={siteInfo.phoneHref} class="rounded-full bg-[var(--color-secondary)] px-4 py-2 text-sm font-semibold text-white">Sună</a>
+            <a href={siteInfo.whatsapp} target="_blank" rel="noopener" class="rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white">WhatsApp</a>
+          </div>
+          <div class="mt-6 rounded-2xl bg-[var(--color-muted)] p-4 text-xs">
+            <p class="font-semibold">Harta (GDPR friendly)</p>
+            <p class="mt-1 text-[var(--color-text-muted)]">Imagine statică + buton care încarcă Google Maps doar la click, ca să nu transferăm date înainte de consimțământ.</p>
+            <button onclick="this.nextElementSibling.classList.remove('hidden'); this.remove()" class="mt-3 rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-semibold">Încarcă harta</button>
+            <div class="hidden mt-3 overflow-hidden rounded-xl">
+              <iframe title="Harta Galati" src="https://www.google.com/maps?q=Galati+Faleza&z=13&output=embed" width="100%" height="250" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="md:col-span-7">
+        <form method="POST" action="/api/contact" class="rounded-3xl border border-black/5 bg-white p-6">
+          <h2 class="font-semibold">Trimite-ne un mesaj</h2>
+          <p class="mt-1 text-xs text-[var(--color-text-muted)]">Câmpurile cu * sunt obligatorii. Colectăm doar datele necesare rezervării. Vezi <a href="/ro/politica-confidentialitate/" class="underline">confidențialitatea</a>.</p>
+          
+          <!-- honeypot -->
+          <div class="hidden" aria-hidden="true">
+            <label>Nu completa<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
+
+          <div class="mt-4 grid gap-3 md:grid-cols-2">
+            <label class="text-sm">Prenume*<input required name="firstName" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]" placeholder="Ana" /></label>
+            <label class="text-sm">Nume*<input required name="lastName" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]" placeholder="Popescu" /></label>
+            <label class="text-sm">Email*<input required type="email" name="email" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]" placeholder="ana@exemplu.ro" /></label>
+            <label class="text-sm">Telefon*<input required type="tel" name="phone" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]" placeholder="+40 7xx xxx xxx" /></label>
+            <label class="text-sm">Apartament
+              <select name="apartment" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2">
+                <option value="">Oricare</option>
+                <option value="m19">M19 - Faleză</option>
+                <option value="m2">M2 - Tribunal</option>
+              </select>
+            </label>
+            <label class="text-sm">Nr. persoane
+              <select name="guests" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2">
+                <option>1</option><option>2</option><option selected>3</option><option>4</option><option>5 (cu acord)</option>
+              </select>
+            </label>
+            <label class="text-sm">Check-in<input type="date" name="checkin" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2" /></label>
+            <label class="text-sm">Check-out<input type="date" name="checkout" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2" /></label>
+            <label class="text-sm">Plată
+              <select name="payment" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2">
+                <option>Card / transfer normal</option>
+                <option>Card de vacanță Edenred</option>
+                <option>Card de vacanță Up</option>
+                <option>Card de vacanță Pluxee</option>
+              </select>
+            </label>
+            <label class="text-sm md:col-span-2">Mesaj<textarea name="message" rows="4" class="mt-1 w-full rounded-xl border border-black/10 px-3 py-2" placeholder="Perioada dorită, întrebări..."></textarea></label>
+          </div>
+
+          <label class="mt-3 flex gap-2 text-xs">
+            <input type="checkbox" required name="consent" class="mt-0.5" />
+            <span>Sunt de acord ca datele trimise să fie folosite doar pentru a-mi răspunde la solicitare, conform <a href="/ro/politica-confidentialitate/" class="underline">politicii de confidențialitate</a>.*</span>
+          </label>
+
+          <button type="submit" class="mt-4 w-full rounded-full bg-[var(--color-primary)] py-3 text-sm font-semibold text-white hover:bg-[var(--color-primary-hover)]">Trimite solicitarea</button>
+          <p class="mt-2 text-center text-xs text-[var(--color-text-muted)]">Fără plată online. Primești confirmare pe email și telefon.</p>
+        </form>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,16 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+const title='Blog | Alpasio Rentals';
+const canonical='https://alpasio-rentals-preview.ursan.org/en/blog/';
+---
+<Base title={title} description="Galati guides and tips" lang="en" canonical={canonical} hreflang={{ ro: canonical.replace('/en/blog/','/ro/blog/'), en: canonical }}>
+  <Header lang="en" currentPath="/en/blog/" />
+  <main id="main" class="mx-auto max-w-6xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Blog</h1>
+    <p class="mt-2 text-sm">Guides adapted for English guests.</p>
+    <a href="/en/blog/places-to-visit-galati/" class="mt-4 block rounded-2xl border p-4">Places to visit in Galati →</a>
+  </main>
+  <Footer />
+</Base>

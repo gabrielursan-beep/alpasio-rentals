@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+Sitemap: https://alpasio-rentals-preview.ursan.org/sitemap-index.xml

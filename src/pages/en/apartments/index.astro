@@ -1,0 +1,20 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ApartmentCard from '../../../components/ApartmentCard.astro';
+import { apartments } from '../../../data/apartments';
+const title='Serviced Apartments Galați | Alpasio Rentals';
+const description='Explore Alpasio apartments in Galati: M19 near Faleza and M2 near Tribunal. 54m², 4 guests, WiFi, parking.';
+const canonical='https://alpasio-rentals-preview.ursan.org/en/apartments/';
+---
+<Base title={title} description={description} lang="en" canonical={canonical} hreflang={{ ro: canonical.replace('/en/apartments/','/ro/apartamente/'), en: canonical }}>
+  <Header lang="en" currentPath="/en/apartments/" />
+  <main id="main" class="mx-auto max-w-6xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Alpasio Apartments in Galati</h1>
+    <div class="mt-6 grid gap-6 md:grid-cols-2">
+      {apartments.map(a => <ApartmentCard apartment={a} lang="en" />)}
+    </div>
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,39 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ApartmentCard from '../../../components/ApartmentCard.astro';
+import { apartments } from '../../../data/apartments';
+
+const title = 'Apartamente în regim hotelier Galați | Alpasio Rentals';
+const description = 'Vezi apartamentele Alpasio disponibile în Galați: M19 lângă Faleză și M2 lângă Tribunal. 54m², 4 persoane, WiFi, parcare, bucătărie utilată. De la 51€/noapte.';
+const canonical = 'https://alpasio-rentals-preview.ursan.org/ro/apartamente/';
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Acasă", "item": "https://alpasio-rentals-preview.ursan.org/ro/" },
+    { "@type": "ListItem", "position": 2, "name": "Apartamente", "item": canonical }
+  ]
+};
+---
+
+<Base title={title} description={description} lang="ro" canonical={canonical} hreflang={{ ro: canonical, en: canonical.replace('/ro/apartamente/','/en/apartments/') }} schema={schema}>
+  <Header lang="ro" currentPath="/ro/apartamente/" />
+  <main id="main" class="mx-auto max-w-6xl px-4 py-8 md:px-6">
+    <nav aria-label="Breadcrumb" class="text-xs text-[var(--color-text-muted)]"><a href="/ro/" class="hover:underline">Acasă</a> <span aria-hidden>›</span> Apartamente</nav>
+    <h1 class="mt-2 font-serif text-3xl font-bold">Apartamentele Alpasio în Galați</h1>
+    <p class="mt-2 max-w-2xl text-sm text-[var(--color-text-muted)]">Două apartamente active, complet utilate, ideale pentru delegații și familii. Două locații noi în pregătire.</p>
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      {apartments.map(a => <ApartmentCard apartment={a} lang="ro" />)}
+    </div>
+    <div class="mt-8 rounded-2xl bg-white p-6 border border-black/5">
+      <h2 class="font-semibold">În curând</h2>
+      <ul class="mt-2 list-disc pl-5 text-sm text-[var(--color-text-muted)]">
+        <li><strong>Aparterm</strong> — parter, 10 min de intrarea dinspre Brăila/Tecuci, lângă Spitalul Județean, Kaufland, Lidl, Altex. Bucătărie cu aparatură modernă.</li>
+        <li><strong>P8</strong> — 2 camere + balcon, etaj 1 cu lift, central, lângă Faleză, AC, bucătărie completă.</li>
+      </ul>
+    </div>
+  </main>
+  <Footer />
+</Base>

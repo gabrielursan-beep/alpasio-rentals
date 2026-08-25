@@ -1,0 +1,48 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { siteInfo } from '../../../data/apartments';
+
+const title = 'Întrebări frecvente | Alpasio Rentals';
+const description = 'Răspunsuri clare despre check-in 14:00, check-out 12:00, anulare 24h, parcare, lift, balcon, carduri vacanță, factură și chei.';
+const canonical = 'https://alpasio-rentals-preview.ursan.org/ro/intrebari-frecvente/';
+const faqs = [
+  { q: 'Pot anula o rezervare?', a: 'Da, cu minim 24 de ore înainte. Contactează-ne la telefon sau email și primești confirmarea anulării.' },
+  { q: 'La ce oră se face check-in-ul?', a: `Check-in de la ${siteInfo.checkIn}, cu 30 de minute anunț telefonic. Dacă apartamentul e liber mai devreme, poți intra mai repede.` },
+  { q: 'La ce oră se face check-out-ul?', a: `Check-out până la ${siteInfo.checkOut}. Prelungirea e posibilă doar cu acord prealabil, ca să nu se suprapună cu următoarea rezervare.` },
+  { q: 'Se poate fuma?', a: 'Da, doar pe balcon, în spațiul amenajat. În interior nu se fumează.' },
+  { q: 'Prețul e pe cameră sau pe apartament?', a: 'Prețul este per apartament pe noapte, nu pe persoană, pentru până la 4 persoane. Persoana a 5-a cu acord.' },
+  { q: 'Există parcare?', a: 'Da, există parcare la bloc, dar locul nu este rezervat nominal. Găsești loc în apropiere.' },
+  { q: 'Există lift?', a: 'Da, toate locațiile noastre au lift.' },
+  { q: 'Apartamentele au balcon?', a: 'Da, toate au balcon.' },
+  { q: 'Câte persoane?', a: 'Apartamentele sunt pentru 4 persoane. Peste 4, discutăm în prealabil cu proprietarul.' },
+  { q: 'Pot plăti cu card de vacanță?', a: 'Da, acceptăm Edenred, Up și Pluxee (fost Sodexo). Detalii pe pagina Carduri de vacanță.' },
+  { q: 'Cum primesc cheile?', a: 'Contactezi persoana desemnată cu 30 min înainte. Cheile se predau la locație după preluarea datelor.' },
+  { q: 'Se poate închiria pe termen lung?', a: 'Da, discutăm tariful pentru șederi lungi, în funcție de perioadă.' },
+];
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+---
+
+<Base title={title} description={description} lang="ro" canonical={canonical} hreflang={{ ro: canonical, en: canonical.replace('/ro/intrebari-frecvente/','/en/faq/') }} schema={schema}>
+  <Header lang="ro" currentPath="/ro/intrebari-frecvente/" />
+  <main id="main" class="mx-auto max-w-3xl px-4 py-8 md:px-6">
+    <h1 class="font-serif text-3xl font-bold">Întrebări frecvente</h1>
+    <p class="mt-2 text-sm text-[var(--color-text-muted)]">Dacă nu găsești răspunsul, sună la {siteInfo.phone} sau scrie-ne.</p>
+    <div class="mt-6 divide-y divide-black/5 rounded-3xl border border-black/5 bg-white">
+      {faqs.map((f) => (
+        <details class="group p-5 open:bg-[var(--color-muted)]">
+          <summary class="cursor-pointer list-none font-semibold group-open:text-[var(--color-primary)]">
+            <span class="flex justify-between gap-4">{f.q} <span aria-hidden class="text-[var(--color-primary)] group-open:rotate-180 transition">⌄</span></span>
+          </summary>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </main>
+  <Footer />
+</Base>
