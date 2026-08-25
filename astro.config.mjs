@@ -8,6 +8,9 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://alpasio-rentals-preview.ursan.org',
   output: 'static',
+  security: {
+    checkOrigin: false,
+  },
   adapter: node({
     mode: 'standalone',
   }),
